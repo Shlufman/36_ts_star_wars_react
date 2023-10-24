@@ -1,6 +1,9 @@
 import React from 'react';
 
-const FarGalaxy = () =>
+interface PropsFarGalaxy{
+
+}
+const FarGalaxy:React.FC<PropsFarGalaxy> = () =>
 {
     return (
         <p className="farGalaxy">title: The Empire Strikes Back episode: 5 release_date: 1980-05-17 opening

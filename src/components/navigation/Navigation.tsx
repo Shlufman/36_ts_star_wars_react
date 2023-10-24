@@ -1,8 +1,12 @@
 import React from 'react';
-import {navItems} from "../../utils/constants";
+import {TNavItem} from "../../utils/constants";
 import {NavItem} from "../nav_item";
 
-const Navigation = () =>
+interface PropsNavigation{
+    navItems:Array<TNavItem>;
+}
+
+const Navigation:React.FC<PropsNavigation> = ({navItems}) =>
 {
     return (
         <nav>

@@ -1,6 +1,10 @@
 import React from 'react';
 
-const Footer = () =>
+interface PropsFooter{
+
+}
+
+const Footer:React.FC<PropsFooter> = () =>
 {
     return (
         <footer className="rounded-bottom-4">
