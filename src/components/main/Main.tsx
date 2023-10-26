@@ -15,7 +15,7 @@ const Main :React.FC<PropsApp>= (props) =>
         <main className="clearfix">
             <Hero/>
             <Friends {...props}/>
-            <FarGalaxy/>
+            <FarGalaxy {...props}/>
         </main>
     );
 };

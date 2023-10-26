@@ -1,26 +1,39 @@
 import React from 'react';
 
-interface PropsFarGalaxy{
-
+interface PropsFarGalaxy {
+    title: string;
 }
-const FarGalaxy:React.FC<PropsFarGalaxy> = () =>
-{
-    return (
-        <p className="farGalaxy">title: The Empire Strikes Back episode: 5 release_date: 1980-05-17 opening
-            crawl: It is
-            a dark
-            time for the
-            Rebellion. Although the Death Star has been destroyed, Imperial troops have driven the Rebel forces
-            from their
-            hidden base and pursued them across the galaxy. Evading the dreaded Imperial Starfleet, a group of
-            freedom
-            fighters led by Luke Skywalker has established a new secret base on the remote ice world of Hoth.
-            The evil
-            lord
-            Darth Vader, obsessed with finding young Skywalker, has dispatched thousands of remote probes into
-            the far
-            reaches of space.... </p>
-    );
-};
 
-export  {FarGalaxy};
+interface StateFarGalaxy {
+    title: string;
+}
+
+class FarGalaxy extends React.Component<PropsFarGalaxy, StateFarGalaxy> {
+
+    constructor(props: PropsFarGalaxy) {
+        super(props);
+        this.state = {title:props.title};
+    }
+
+    componentDidMount() {
+        let idFilm:number = Math.floor(Math.random()*5+1);
+        fetch(`https://sw-info-api.herokuapp.com/v1/films/${idFilm}`)
+            .then(response => response.json())
+            .then(data=>this.setState({title:data.opening_crawl}));
+        
+            // .then(data => this.setState({isLoading: false, hero: data}))
+    }
+
+    render(): React.ReactNode {
+        return (
+            <p className="farGalaxy">{this.state.title}</p>
+        );
+    }
+}
+
+// const FarGalaxy:React.FC<PropsFarGalaxy> = ({title}) =>
+// {
+//
+// };
+
+export {FarGalaxy};
