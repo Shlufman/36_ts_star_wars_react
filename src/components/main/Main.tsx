@@ -1,23 +1,23 @@
 import React from 'react';
-import {Hero} from "../hero";
-import {Friends} from "../friends";
-import {FarGalaxy} from "../far_galaxy";
-import {TFriendItem, TNavItem} from "../../utils/constants";
+import {Home} from "./../home";
+import {StarWars} from "./../star_wars";
+import {AboutMe} from "./../about_me";
+import {Contact} from "./../contact";
+import {navItems} from "../../utils/constants";
 
 interface PropsApp{
-    friendItems :Array<TFriendItem>;
-    navItems:Array<TNavItem>;
-    urlImageSrc:string;
+    activePage:string;
 }
-const Main :React.FC<PropsApp>= (props) =>
+
+const Main :React.FC<PropsApp>= ({activePage}) =>
 {
-    return (
-        <main className="clearfix">
-            <Hero/>
-            <Friends {...props}/>
-            <FarGalaxy {...props}/>
-        </main>
-    );
+    switch (activePage)
+    {
+        case navItems[1]: return <AboutMe/>
+        case navItems[2]: return <StarWars/>
+        case navItems[3]: return <Contact/>
+        default: return <Home />
+    }
 };
 
- export {Main}; //default
+ export {Main};

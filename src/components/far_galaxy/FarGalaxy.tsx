@@ -1,39 +1,45 @@
 import React from 'react';
+import {getRandomFilmData} from '../../data/api';
 
 interface PropsFarGalaxy {
-    title: string;
+
 }
 
 interface StateFarGalaxy {
-    title: string;
+    isLoading: boolean;
+    filmTitle?: string;
+    filmData?: string;
 }
 
 class FarGalaxy extends React.Component<PropsFarGalaxy, StateFarGalaxy> {
 
     constructor(props: PropsFarGalaxy) {
         super(props);
-        this.state = {title:props.title};
+        this.state = {isLoading: true};
     }
 
     componentDidMount() {
-        let idFilm:number = Math.floor(Math.random()*5+1);
-        fetch(`https://sw-info-api.herokuapp.com/v1/films/${idFilm}`)
-            .then(response => response.json())
-            .then(data=>this.setState({title:data.opening_crawl}));
-        
-            // .then(data => this.setState({isLoading: false, hero: data}))
+        getRandomFilmData().then(data =>
+            this.setState(
+                {
+                    isLoading: false,
+                    filmTitle: data?.filmTitle,
+                    filmData: data?.filmData
+                }
+            ));
     }
 
     render(): React.ReactNode {
-        return (
-            <p className="farGalaxy">{this.state.title}</p>
-        );
+        if (this.state.isLoading)
+            return <p className="far-galaxy">'Loading...'</p>
+        else
+            return (
+                <>
+                    <p className="farGalaxy">{this.state.filmTitle}</p>
+                    <p>{this.state.filmData}</p>
+                </>
+            );
     }
 }
-
-// const FarGalaxy:React.FC<PropsFarGalaxy> = ({title}) =>
-// {
-//
-// };
 
 export {FarGalaxy};

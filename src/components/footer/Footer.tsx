@@ -15,4 +15,4 @@ const Footer:React.FC<PropsFooter> = () =>
     );
 };
 
-export {Footer};//default
+export {Footer};
